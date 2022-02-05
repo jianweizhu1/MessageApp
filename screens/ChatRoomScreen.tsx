@@ -1,11 +1,22 @@
 import React from "react";
-import {Text,View,StyleSheet} from "react-native";
+import {Text,View,StyleSheet, FlatList,SafeAreaView} from "react-native";
 import Message from '../components/Message'
+import chatRoomData from '../assets/data/Chats';
+import MessageInput from '../components/MessageInput';
+import { useRoute } from "@react-navigation/native";
 export default function ChatRoomScreen(){
+    const route = useRoute();
+    console.warn("Displaying chat room: ", route.params?.id)
+    
     return (
-        <View style = {styles.page}>
-        <Message />
-        </View>
+        <SafeAreaView style = {styles.page}>
+            <FlatList
+                data = {chatRoomData.messages}
+                renderItem={({item}) => <Message message={item} />}
+                inverted
+                />
+            <MessageInput />
+        </SafeAreaView>
     )
 };
 

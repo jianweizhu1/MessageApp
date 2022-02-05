@@ -1,10 +1,18 @@
 import React from "react";
 import{View, Text,StyleSheet} from 'react-native';
-const Message = () => {
-    const isMe = true;
+const blue = '#3777f0';
+const grey = 'lightgrey';
+const myId = 'u1';
+const Message = ({ message })  => {
+
+    const isMe = message.user.id ==myId;
+    
     return (
-        <View style = {styles.container}>
-           <Text style ={styles.text}>Message </Text>
+        <View style = {
+            [styles.container, {
+            backgroundColor: isMe ? grey: blue,
+        marginLeft: isMe ? 'auto' : 10 }]}>
+           <Text style ={{color: isMe ? 'black' : 'white'}}> {message.content}</Text>
         </View>
     )
 }
@@ -12,11 +20,12 @@ const Message = () => {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: 'purple',
+        backgroundColor: blue,
         padding: 10,
         margin: 10,
         borderRadius:15,
-        width: '75%', 
+        maxWidth: '75%', 
+        
     },
     text:{
         color:'white',
